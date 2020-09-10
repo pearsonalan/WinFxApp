@@ -84,14 +84,14 @@ public:
 	virtual bool create(LPWSTR pstrCmdLine, int nCmdShow);
 	void destroy() { ::DestroyWindow(hwnd); }
 
-	Rect getClientRect() { Rect r; ::GetClientRect(hwnd,(LPRECT)r); return r; }
+	Rect getClientRect() { Rect r; ::GetClientRect(hwnd, (LPRECT)r); return r; }
 		
 	int messageBox(const std::wstring& text, const std::wstring& caption, UINT uType = MB_OK ) {
 		return ::MessageBox(hwnd, text.c_str(), caption.c_str(), uType);
 	}
 	void showWindow(int nCmdShow) { ::ShowWindow(hwnd, nCmdShow); }
 	bool setWindowPos(HWND hwndBefore, int x, int y, int cx, int cy, UINT uiFlags) {
-		return ::SetWindowPos( hwnd, hwndBefore, x, y, cx, cy, uiFlags); 
+		return ::SetWindowPos(hwnd, hwndBefore, x, y, cx, cy, uiFlags); 
 	}
 	bool postMessage(UINT msg, WPARAM wparam, LPARAM lparam) { 
 		return (bool) ::PostMessage(hwnd, msg, wparam, lparam);
@@ -108,13 +108,13 @@ public:
 	virtual LRESULT handleWindowMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 
-LRESULT CALLBACK WndProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam );
+LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 class Dialog : public Window {
 protected:
 	int idd;
 
-	friend BOOL CALLBACK DialogProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam );
+	friend BOOL CALLBACK DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
 
@@ -124,12 +124,12 @@ public:
 		{
 		}
 
-	HWND getDlgItem( int id ) { return GetDlgItem( hwnd, id ); }
+	HWND getDlgItem(int id) { return GetDlgItem( hwnd, id ); }
 	LRESULT sendDlgItemMessage(int id, UINT msg, WPARAM wparam, LPARAM lparam) { 
 		return SendDlgItemMessage(hwnd, id, msg, wparam, lparam); 
 	}
 		
-	bool endDialog( int nResult );
+	bool endDialog(int nResult);
 		
 	std::wstring getItemText(int id);
 	void setItemText(int id, const std::wstring& str);
@@ -142,8 +142,8 @@ public:
 	int doDialogBox();
 };
 
-inline bool Dialog::endDialog( int nResult ) {
-	return EndDialog( hwnd, nResult );
+inline bool Dialog::endDialog(int nResult) {
+	return EndDialog(hwnd, nResult);
 }
 
 inline BOOL textOut(HDC hdc, int x, int y, const std::wstring& str) {
